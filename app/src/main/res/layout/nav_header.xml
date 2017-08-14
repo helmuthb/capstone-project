@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:background="@drawable/side_nav_bar"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/nav_user_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/nav_image_margin_bottom"
+        android:layout_marginLeft="@dimen/keyline"
+        android:layout_marginStart="@dimen/keyline"
+        android:contentDescription="@string/profile_picture"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <TextView
+        android:id="@+id/nav_user_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/keyline"
+        android:layout_marginEnd="@dimen/keyline"
+        android:layout_marginRight="@dimen/keyline"
+        android:paddingTop="@dimen/keyline"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/nav_user_picture"
+        app:layout_constraintTop_toBottomOf="@id/nav_user_picture"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="John Doe" />
+
+    <Button
+        android:id="@+id/nav_logout"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/keyline"
+        android:layout_marginEnd="@dimen/keyline"
+        android:text="@string/logout"
+        app:layout_constraintBaseline_toBaselineOf="@id/nav_user_name"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/nav_why_login"
+        android:layout_width="@dimen/nav_why_width"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/nav_image_margin_bottom"
+        android:layout_marginLeft="@dimen/keyline"
+        android:layout_marginStart="@dimen/keyline"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="@string/why_login"
+        />
+
+    <Button
+        android:id="@+id/nav_login"
+        style="@style/ButtonStyleEmphasized"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/keyline"
+        android:layout_marginEnd="@dimen/keyline"
+        android:layout_marginRight="@dimen/keyline"
+        android:paddingTop="@dimen/keyline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nav_why_login"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/login"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+</android.support.constraint.ConstraintLayout>

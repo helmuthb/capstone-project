@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/overview" />
+        <item
+            android:id="@+id/nav_questions"
+            android:icon="@drawable/ic_question"
+            android:title="@string/questions" />
+    </group>
+
+    <item android:title="@string/about">
+        <menu>
+            <item
+                android:id="@+id/nav_license"
+                android:icon="@drawable/ic_license"
+                android:title="@string/license" />
+            <item
+                android:id="@+id/nav_source"
+                android:icon="@drawable/ic_source"
+                android:title="@string/source_code" />
+            <item
+                android:id="@+id/nav_gdg"
+                android:icon="@drawable/ic_link"
+                android:title="@string/gdg_vienna" />
+        </menu>
+    </item>
+
+</menu>

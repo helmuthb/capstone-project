@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="@dimen/star_size"
+        android:layout_height="@dimen/star_size"
+        android:layout_margin="@dimen/keyline"
+        android:id="@+id/star_combined">
+
+        <ImageView
+            android:id="@+id/star_image"
+            android:layout_width="@dimen/star_size"
+            android:layout_height="@dimen/star_size"
+            app:srcCompat="@drawable/ic_star_empty"
+            android:contentDescription="@string/upvotes"
+            android:tint="@color/colorPrimary"
+            />
+
+        <TextView
+            android:id="@+id/star_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="4" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/question_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/keyline"
+        android:layout_marginRight="@dimen/keyline"
+        tools:text="Why using Android? Isn't iOS a much a better operating system, when looking into the merits of it?" />
+</LinearLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "61244160299",
+    "firebase_url": "https://room-questions.firebaseio.com",
+    "project_id": "room-questions",
+    "storage_bucket": "room-questions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61244160299:android:d31b89f15499f221",
+        "android_client_info": {
+          "package_name": "at.breitenfellner.roomquestions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61244160299-n51mtijkclj0iqnji40dch1693llsr0m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "at.breitenfellner.roomquestions",
+            "certificate_hash": "3f227e629adcd9bb3a334b70356427fe4b5d2d77"
+          }
+        },
+        {
+          "client_id": "61244160299-2c566jcomvonlpdi0k6koo872aneu5ru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ8dcCkrFq56cMrxFGoT08E2ZpjfNboN0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61244160299-2c566jcomvonlpdi0k6koo872aneu5ru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

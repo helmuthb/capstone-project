@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Room Questions</string>
+    <string name="home_heading">GDG Vienna Live Questions App</string>
+    <string name="home_intro">You can see all questions asked per room.</string>
+    <string name="why_login">To ask questions or to upvote existing ones please log in!</string>
+    <string name="why_login_short">To ask questions please log in!</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="about">About</string>
+    <string name="license">License</string>
+    <string name="source_code">Source Code</string>
+    <string name="gdg_vienna">GDG Vienna</string>
+    <string name="questions">Questions</string>
+    <string name="overview">Overview</string>
+    <string name="intro_ask_question">Add a question - the most-voted questions will be answered live!</string>
+    <string name="your_question">Your Question</string>
+    <string name="show_your_name">Show your name</string>
+    <string name="ask_question">Ask Question</string>
+    <string name="app_long_name">GDG Vienna Live Questions App</string>
+    <string name="about_app_long">This app is brought to you with love by the GDG Vienna team.</string>
+    <string name="libraries_used">Libraries Used</string>
+    <string name="licences_used">The following open source libraries are used in this application:</string>
+    <string name="apache_license">Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+        \nyou may not use this file except in compliance with the License.
+        \nYou may obtain a copy of the License at
+        \n
+        \nhttp://www.apache.org/licenses/LICENSE-2.0
+        \n
+        \nUnless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        \nSee the License for the specific language governing permissions and
+        limitations under the License.</string>
+    <string name="dagger2">Dagger 2</string>
+    <string name="copyright_dagger2">Copyright 2012 The Dagger Authors</string>
+    <string name="butterknife">Butter Knife</string>
+    <string name="copyright_butterknife">Copyright 2013 Jake Wharton</string>
+    <string name="github_source_link">https://github.com/helmuthb/capstone-project</string>
+    <string name="copyright">Copyright 2017 GDG Vienna</string>
+    <string name="widget_configuration">Widget Configuration</string>
+    <string name="widget_config_intro">Specify the room for which you want to see questions in the widget.</string>
+    <string name="cancel">Cancel</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="upvotes">Upvotes</string>
+</resources>
