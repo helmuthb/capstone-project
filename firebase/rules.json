@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "rooms": {
+      ".read": true,
+      "$room": {
+        "questions": {
+          ".write": "!data.exists() && auth != null"
+        }
+      }
+    }
+  }
+}
