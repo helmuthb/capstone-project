@@ -78,6 +78,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/timber_heading"
+        android:layout_marginTop="@dimen/half_keyline"
+        android:textAppearance="@style/HeaderSmallTextAppearance"
+        android:text="@string/timber"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timber_copyright"
+        android:textAppearance="@style/BodyTextAppearance"
+        android:text="@string/copyright_timber"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timber_license"
+        android:text="@string/apache_license"
+        android:layout_marginTop="@dimen/half_keyline"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/source_code"
         android:text="@string/source_code"
         android:textAppearance="@style/HeaderTextAppearance"/>

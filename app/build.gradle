@@ -13,6 +13,10 @@ android {
         // recommended for Firebase UI Auth
         resConfigs "auto"
         vectorDrawables.useSupportLibrary = true
+        resValue "string", "facebook_application_id", "${ROOMS_FACEBOOK_APP_ID}"
+        resValue "string", "facebook_login_protocol_scheme", "fb${ROOMS_FACEBOOK_APP_ID}"
+        resValue "string", "twitter_consumer_key", "${ROOMS_TWITTER_APP_ID}"
+        resValue "string", "twitter_consumer_secret", "${ROOMS_TWITTER_SECRET}"
     }
     buildTypes {
         release {
@@ -37,24 +41,28 @@ dependencies {
     compile "com.android.support:customtabs:$androidSupportVersion"
     compile("com.twitter.sdk.android:twitter-core:3.0.0@aar") { transitive = true }
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.firebase:firebase-core:11.0.4'
-    compile 'com.google.firebase:firebase-auth:11.0.4'
-    compile 'com.google.firebase:firebase-database:11.0.4'
+    compile "com.google.firebase:firebase-core:$firebaseVersion"
+    compile "com.google.firebase:firebase-auth:$firebaseVersion"
+    compile "com.google.firebase:firebase-database:$firebaseVersion"
     compile 'com.firebaseui:firebase-ui-auth:2.2.0'
     compile 'com.facebook.android:facebook-android-sdk:4.22.1'
-    compile 'com.jakewharton:butterknife:8.8.1'
-    compile 'android.arch.lifecycle:runtime:1.0.0-alpha5'
-    compile 'com.google.dagger:dagger:2.11'
-    compile 'com.google.dagger:dagger-android:2.11'
-    compile 'com.google.dagger:dagger-android-support:2.11'
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    compile "com.jakewharton.timber:timber:$timberVersion"
+    compile "android.arch.lifecycle:runtime:$architectureVersion"
+    compile "android.arch.lifecycle:extensions:$architectureVersion"
+    compile "com.google.dagger:dagger:$daggerVersion"
+    compile "com.google.dagger:dagger-android:$daggerVersion"
+    compile "com.google.dagger:dagger-android-support:$daggerVersion"
+    compile "com.github.bumptech.glide:glide:$glideVersion"
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:1.0.0'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.0'
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-alpha5'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$architectureVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 }
 
 

@@ -5,6 +5,7 @@
     <string name="home_intro">You can see all questions asked per room.</string>
     <string name="why_login">To ask questions or to upvote existing ones please log in!</string>
     <string name="why_login_short">To ask questions please log in!</string>
+    <string name="welcome_text">Welcome, %1$s!</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="about">About</string>
@@ -36,6 +37,8 @@
     <string name="copyright_dagger2">Copyright 2012 The Dagger Authors</string>
     <string name="butterknife">Butter Knife</string>
     <string name="copyright_butterknife">Copyright 2013 Jake Wharton</string>
+    <string name="timber">Timber</string>
+    <string name="copyright_timber">Copyright 2013 Jake Wharton</string>
     <string name="github_source_link">https://github.com/helmuthb/capstone-project</string>
     <string name="copyright">Copyright 2017 GDG Vienna</string>
     <string name="widget_configuration">Widget Configuration</string>

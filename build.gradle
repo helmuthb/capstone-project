@@ -18,9 +18,17 @@ allprojects {
         jcenter()
         // needed for Architecture components
         maven { url 'https://maven.google.com' }
+        // for Twitter API
+        maven { url 'https://maven.fabric.io/public' }
     }
     ext {
         androidSupportVersion = "26.0.1"
+        daggerVersion = "2.11"
+        firebaseVersion = "11.0.4"
+        butterknifeVersion = "8.8.1"
+        architectureVersion = "1.0.0-alpha5"
+        glideVersion = "4.0.0"
+        timberVersion = "4.5.1"
     }
 }
 
