@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Room Questions</string>
-    <string name="home_heading">GDG Vienna Live Questions App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="home_intro">You can see all questions asked per room.</string>
     <string name="why_login">To ask questions or to upvote existing ones please log in!</string>
     <string name="why_login_short">To ask questions please log in!</string>

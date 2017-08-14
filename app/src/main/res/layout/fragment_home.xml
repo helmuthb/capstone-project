@@ -11,7 +11,7 @@
         android:textAppearance="@style/HeaderTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/home_heading" />
+        android:text="@string/app_long_name" />
 
     <TextView
         android:id="@+id/text_intro"
