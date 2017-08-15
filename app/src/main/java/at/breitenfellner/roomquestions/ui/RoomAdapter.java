@@ -50,7 +50,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         Room room;
-        final RoomSelectionListener listener;
         @BindView(R.id.room_name)
         TextView roomName;
         @BindView(R.id.room_description)
@@ -61,7 +60,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         ViewHolder(@NonNull View itemView, final RoomSelectionListener listener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            this.listener = listener;
             // call listener when button is clicked
             roomButton.setOnClickListener(new View.OnClickListener() {
                 @Override

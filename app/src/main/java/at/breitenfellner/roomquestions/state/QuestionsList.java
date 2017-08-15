@@ -2,18 +2,20 @@ package at.breitenfellner.roomquestions.state;
 
 import java.util.List;
 
+import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
 
 /**
- * Interface to get the current set of rooms and information about them.
+ * Interface to get the list of questions for a room.
  */
 
-public interface RoomsList {
-    List<Room> getRooms();
+public interface QuestionsList {
+    List<Question> getQuestions();
+    void setRoom(Room room);
     void addChangeListener(ChangeListener changeListener);
     void removeChangeListener(ChangeListener changeListener);
 
     interface ChangeListener {
-        void onChange(RoomsList roomsList);
+        void onChange(QuestionsList questionsList);
     }
 }

@@ -51,11 +51,6 @@ public class FirebaseRoomsList implements RoomsList {
     }
 
     @Override
-    public int getCount() {
-        return rooms.size();
-    }
-
-    @Override
     public List<Room> getRooms() {
         return rooms;
     }

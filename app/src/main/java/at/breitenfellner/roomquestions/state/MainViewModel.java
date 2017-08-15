@@ -1,10 +1,9 @@
 package at.breitenfellner.roomquestions.state;
 
 import android.app.Activity;
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.support.v4.app.FragmentActivity;
 
 import com.firebase.ui.auth.AuthUI;
@@ -17,6 +16,7 @@ import javax.inject.Inject;
 
 import at.breitenfellner.roomquestions.di.DaggerRoomQuestionsComponent;
 import at.breitenfellner.roomquestions.di.RoomQuestionsComponent;
+import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.util.KeyIdSource;
@@ -26,7 +26,7 @@ import timber.log.Timber;
  * The view model used for the main activity.
  */
 
-public class MainViewModel extends AndroidViewModel
+public class MainViewModel extends ViewModel
         implements UserAuthState.StateChangeListener, RoomsList.ChangeListener {
     public static final int REQUESTCODE_AUTH = 42;
     @Inject
@@ -39,11 +39,10 @@ public class MainViewModel extends AndroidViewModel
     private MutableLiveData<Boolean> liveLoggedIn;
     private User user;
     private MutableLiveData<User> liveUser;
-    private List<Room> rooms;
     private MutableLiveData<List<Room>> liveRooms;
 
-    public MainViewModel(Application application) {
-        super(application);
+    public MainViewModel() {
+        super();
         RoomQuestionsComponent component = DaggerRoomQuestionsComponent.builder().build();
         component.inject(this);
         liveLoggedIn = new MutableLiveData<>();
@@ -52,9 +51,7 @@ public class MainViewModel extends AndroidViewModel
         liveUser = new MutableLiveData<>();
         user = null;
         liveUser.setValue(user);
-        rooms = new ArrayList<>();
         liveRooms = new MutableLiveData<>();
-        liveRooms.setValue(rooms);
         // add listener on authentication status
         userAuthState.addStateChangeListener(this);
         // add listener on room changes
@@ -90,10 +87,14 @@ public class MainViewModel extends AndroidViewModel
         return -1L;
     }
 
-    public LiveData<Boolean> liveIsLoggedIn() {
-        return liveLoggedIn;
+    public Room getRoom(String roomKey) {
+        for (Room r : getLiveRooms().getValue()) {
+            if (r.key.equals(roomKey)) {
+                return r;
+            }
+        }
+        return null;
     }
-
 
     public User getUser() {
         return user;
@@ -130,8 +131,7 @@ public class MainViewModel extends AndroidViewModel
         setUser(state.getUser());
         if (state.getUser() == null) {
             Timber.d("Received new user state: null");
-        }
-        else {
+        } else {
             Timber.d("Received new user state: %s", state.getUser().name);
         }
     }
@@ -144,7 +144,7 @@ public class MainViewModel extends AndroidViewModel
 
     @Override
     public void onChange(RoomsList roomsList) {
-        rooms = roomsList.getRooms();
+        List<Room> rooms = roomsList.getRooms();
         liveRooms.setValue(rooms);
     }
 }

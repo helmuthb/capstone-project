@@ -43,7 +43,7 @@ implements RoomAdapter.RoomSelectionListener {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
         // get view model
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         // listen for authentication changes
         viewModel.liveGetUser().observe(this, new Observer<User>() {
             @Override

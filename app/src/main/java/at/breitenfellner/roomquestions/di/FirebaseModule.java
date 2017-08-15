@@ -7,8 +7,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import at.breitenfellner.roomquestions.firebase.FirebaseQuestionsList;
 import at.breitenfellner.roomquestions.firebase.FirebaseRoomsList;
 import at.breitenfellner.roomquestions.firebase.FirebaseUserAuthState;
+import at.breitenfellner.roomquestions.state.QuestionsList;
 import at.breitenfellner.roomquestions.state.RoomsList;
 import at.breitenfellner.roomquestions.state.UserAuthState;
 import dagger.Module;
@@ -48,5 +50,17 @@ public class FirebaseModule {
     @Named("rooms-root")
     static String getRoomsRoot() {
         return "rooms";
+    }
+
+    @Provides
+    @Singleton
+    static QuestionsList getQuestionsList(DatabaseReference dbReference, @Named("questions-root") String questionsRoot) {
+        return new FirebaseQuestionsList(dbReference, questionsRoot);
+    }
+
+    @Provides
+    @Named("questions-root")
+    static String getQuestionsRoot() {
+        return "questions";
     }
 }

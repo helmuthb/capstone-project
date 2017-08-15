@@ -128,14 +128,26 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment oldFragment = fm.findFragmentById(R.id.fragment_container);
         // Handle navigation menu choices
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_home:
                 // do home action
+                if (!(oldFragment instanceof HomeFragment)) {
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragment_container, new HomeFragment());
+                    ft.commit();
+                }
                 break;
             case R.id.nav_questions:
                 // do questions action
+                if (!(oldFragment instanceof RoomsFragment)) {
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragment_container, new RoomsFragment());
+                    ft.commit();
+                }
                 break;
             case R.id.nav_license:
                 // do license action

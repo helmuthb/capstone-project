@@ -1,14 +1,16 @@
 {
   "rules": {
     "rooms": {
-      ".read": true,
+      ".read": true
     },
     "questions": {
       "$room": {
+        ".read": true,
         ".write": "!data.exists() && auth != null"
       }
     },
     "votes": {
+      ".read": true,
       "$userid": {
         ".write": "$userid === auth.uid"
       }
