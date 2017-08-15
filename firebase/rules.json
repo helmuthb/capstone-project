@@ -2,10 +2,15 @@
   "rules": {
     "rooms": {
       ".read": true,
+    },
+    "questions": {
       "$room": {
-        "questions": {
-          ".write": "!data.exists() && auth != null"
-        }
+        ".write": "!data.exists() && auth != null"
+      }
+    },
+    "votes": {
+      "$userid": {
+        ".write": "$userid === auth.uid"
       }
     }
   }

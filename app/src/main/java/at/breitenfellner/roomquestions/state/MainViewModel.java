@@ -9,27 +9,38 @@ import android.support.v4.app.FragmentActivity;
 
 import com.firebase.ui.auth.AuthUI;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import at.breitenfellner.roomquestions.di.DaggerRoomQuestionsComponent;
 import at.breitenfellner.roomquestions.di.RoomQuestionsComponent;
+import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
+import at.breitenfellner.roomquestions.util.KeyIdSource;
 import timber.log.Timber;
 
 /**
  * The view model used for the main activity.
  */
 
-public class MainViewModel extends AndroidViewModel implements UserAuthState.StateChangeListener {
+public class MainViewModel extends AndroidViewModel
+        implements UserAuthState.StateChangeListener, RoomsList.ChangeListener {
     public static final int REQUESTCODE_AUTH = 42;
     @Inject
     UserAuthState userAuthState;
+    @Inject
+    KeyIdSource keyIdSource;
+    @Inject
+    RoomsList roomsList;
     private boolean loggedIn;
     private MutableLiveData<Boolean> liveLoggedIn;
     private User user;
     private MutableLiveData<User> liveUser;
+    private List<Room> rooms;
+    private MutableLiveData<List<Room>> liveRooms;
 
     public MainViewModel(Application application) {
         super(application);
@@ -41,8 +52,13 @@ public class MainViewModel extends AndroidViewModel implements UserAuthState.Sta
         liveUser = new MutableLiveData<>();
         user = null;
         liveUser.setValue(user);
+        rooms = new ArrayList<>();
+        liveRooms = new MutableLiveData<>();
+        liveRooms.setValue(rooms);
         // add listener on authentication status
         userAuthState.addStateChangeListener(this);
+        // add listener on room changes
+        roomsList.addChangeListener(this);
     }
 
     private void setIsLoggedIn(boolean value) {
@@ -60,17 +76,26 @@ public class MainViewModel extends AndroidViewModel implements UserAuthState.Sta
     }
 
     public boolean isLoggedIn() {
-        // check whether we are already logged in
-        setIsLoggedIn(userAuthState.isAuthenticated());
         return loggedIn;
+    }
+
+    public LiveData<List<Room>> getLiveRooms() {
+        return liveRooms;
+    }
+
+    public long getRoomId(Room room) {
+        if (room != null && room.key != null) {
+            return keyIdSource.getId(room.key);
+        }
+        return -1L;
     }
 
     public LiveData<Boolean> liveIsLoggedIn() {
         return liveLoggedIn;
     }
 
+
     public User getUser() {
-        setUser(userAuthState.getUser());
         return user;
     }
 
@@ -115,5 +140,11 @@ public class MainViewModel extends AndroidViewModel implements UserAuthState.Sta
     protected void onCleared() {
         super.onCleared();
         userAuthState.removeStateChangeListener(this);
+    }
+
+    @Override
+    public void onChange(RoomsList roomsList) {
+        rooms = roomsList.getRooms();
+        liveRooms.setValue(rooms);
     }
 }

@@ -5,13 +5,17 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 import at.breitenfellner.roomquestions.R;
+import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.state.MainViewModel;
 import butterknife.BindView;
@@ -21,7 +25,8 @@ import butterknife.ButterKnife;
  * Home fragment class
  */
 
-public class HomeFragment extends LifecycleFragment {
+public class HomeFragment extends LifecycleFragment
+implements RoomAdapter.RoomSelectionListener {
     MainViewModel viewModel;
     @BindView(R.id.text_why_login)
     TextView whyLoginText;
@@ -29,6 +34,8 @@ public class HomeFragment extends LifecycleFragment {
     Button buttonLogin;
     @BindView(R.id.text_welcome)
     TextView welcomeText;
+    @BindView(R.id.home_room_list)
+    RecyclerView roomListView;
 
     @Nullable
     @Override
@@ -57,6 +64,16 @@ public class HomeFragment extends LifecycleFragment {
                 }
             }
         });
+        // listen for room changes
+        viewModel.getLiveRooms().observe(this, new Observer<List<Room>>() {
+            @Override
+            public void onChanged(@Nullable List<Room> rooms) {
+                if (rooms != null) {
+                    RoomAdapter adapter = new RoomAdapter(rooms, HomeFragment.this);
+                    roomListView.setAdapter(adapter);
+                }
+            }
+        });
         // activate login button
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,5 +82,10 @@ public class HomeFragment extends LifecycleFragment {
             }
         });
         return rootView;
+    }
+
+    @Override
+    public void onRoomSelected(Room room) {
+        //
     }
 }

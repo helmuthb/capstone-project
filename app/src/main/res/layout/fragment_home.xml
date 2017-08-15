@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="@dimen/keyline"
     android:id="@+id/fragment_home_root">
@@ -41,6 +42,7 @@
         android:layout_height="wrap_content"
         android:height="@dimen/why_login_text_height"
         android:gravity="bottom"
+        android:textStyle="italic"
         android:visibility="gone"
         tools:text="Welcome, John!" />
 
@@ -55,6 +57,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/home_room_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_home_room" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_home_room"
+        app:layoutManager="LinearLayoutManager"/>
 </LinearLayout>

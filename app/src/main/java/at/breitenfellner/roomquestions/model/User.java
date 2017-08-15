@@ -8,8 +8,6 @@ public class User {
     public String name;
     public android.net.Uri photoUrl;
 
-    public User() {}
-
     public User(String name, android.net.Uri photoUrl) {
         this.name = name;
         this.photoUrl = photoUrl;

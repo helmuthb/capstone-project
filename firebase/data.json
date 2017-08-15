@@ -3,19 +3,28 @@
     "room1" : {
       "description" : "Android vs. iOS",
       "name" : "Room 1",
-      "questions" : [ null, {
-        "author" : "Helmuth",
-        "date" : 14,
-        "owner" : "jklsfd48",
-        "text" : "Why is it so difficult to work with iOS?",
-        "votes" : {
-          "jklsfd48" : "dummy"
-        }
-      } ]
+      "key": "room1"
     },
     "room2" : {
       "description" : "Material Design",
-      "name" : "Room 2"
+      "name" : "Room 2",
+      "key": "room2"
+    }
+  },
+  "questions" : {
+    "room1": {
+      "unique-key-1": {
+        "author" : "Helmuth",
+        "date" : 14,
+        "owner" : "user1",
+        "text" : "Why is it so difficult to work with iOS?",
+        "key": "unique-key-1"
+      }
+    }
+  },
+  "votes": {
+    "unique-key-1": {
+      "user1": true
     }
   }
 }

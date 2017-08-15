@@ -75,11 +75,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         // get view model
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO: bind correct fragment
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_container, new HomeFragment());
-        ft.commit();
+        // Bind fragment is no save data - otherwise Android will do it for me
+        if (savedInstanceState == null) {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.fragment_container, new HomeFragment());
+            ft.commit();
+        }
         // listen for authentication changes
         viewModel.liveGetUser().observe(this, new Observer<User>() {
             @Override

@@ -10,7 +10,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = FirebaseModule.class)
+@Component(modules = { FirebaseModule.class, UtilModule.class })
 public interface RoomQuestionsComponent {
     // MainViewModel needs user authentication state
     void inject(MainViewModel mainViewModel);

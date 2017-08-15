@@ -6,6 +6,7 @@
     <string name="why_login">To ask questions or to upvote existing ones please log in!</string>
     <string name="why_login_short">To ask questions please log in!</string>
     <string name="welcome_text">Welcome, %1$s!</string>
+    <string name="goto_room">Go to %1$s</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="about">About</string>
