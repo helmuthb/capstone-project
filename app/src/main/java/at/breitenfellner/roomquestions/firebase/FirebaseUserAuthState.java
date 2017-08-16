@@ -64,7 +64,8 @@ public class FirebaseUserAuthState implements UserAuthState, FirebaseAuth.AuthSt
         else {
             String name = firebaseUser.getDisplayName();
             android.net.Uri photoUrl = firebaseUser.getPhotoUrl();
-            user = new User(name, photoUrl);
+            String uid = firebaseUser.getUid();
+            user = new User(name, photoUrl, uid);
         }
         // notify all listeners
         for (StateChangeListener listener : listeners) {

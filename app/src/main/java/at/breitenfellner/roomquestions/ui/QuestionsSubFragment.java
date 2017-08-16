@@ -15,6 +15,7 @@ import java.util.List;
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
+import at.breitenfellner.roomquestions.model.VotedQuestion;
 import at.breitenfellner.roomquestions.state.QuestionsViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +33,7 @@ public class QuestionsSubFragment extends LifecycleFragment implements Questions
     Room room;
     @BindView(R.id.questions_recyclerview)
     RecyclerView questionsView;
+    QuestionsAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class QuestionsSubFragment extends LifecycleFragment implements Questions
         // get the room key
         roomKey = getArguments().getString(ARG_ROOMKEY);
         room = null;
+        adapter = new QuestionsAdapter(this, viewModel.getKeyIdSource());
         viewModel.getLiveRooms().observe(this, new Observer<List<Room>>() {
             @Override
             public void onChanged(@Nullable List<Room> rooms) {
@@ -64,18 +67,20 @@ public class QuestionsSubFragment extends LifecycleFragment implements Questions
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_questions, container, false);
+        View rootView = inflater.inflate(R.layout.subfragment_questions, container, false);
         ButterKnife.bind(this, rootView);
+        // set recyclerview adapter
+        Timber.d("Adding the adapter for questions!");
+        questionsView.setAdapter(adapter);
         // listen for changes
         Timber.d("Waiting for changes of questions...");
-        viewModel.getLiveQuestions().observe(this, new Observer<List<Question>>() {
+        viewModel.getLiveQuestions().observe(this, new Observer<List<VotedQuestion>>() {
             @Override
-            public void onChanged(@Nullable List<Question> questions) {
+            public void onChanged(@Nullable List<VotedQuestion> questions) {
                 if (questions != null) {
                     // question list has changed
-                    QuestionsAdapter adapter = new QuestionsAdapter(questions, QuestionsSubFragment.this);
-                    Timber.d("Adding the adapter for questions!");
-                    questionsView.setAdapter(adapter);
+                    Timber.d("New questions list arrived");
+                    adapter.updateQuestionsList(questions);
                 }
             }
         });
@@ -84,7 +89,7 @@ public class QuestionsSubFragment extends LifecycleFragment implements Questions
     }
 
     @Override
-    public void onQuestionClicked(Question question) {
-        // TODO: implement vote behavior
+    public void onQuestionClicked(VotedQuestion question) {
+        viewModel.setVote(question, !question.votedByMe);
     }
 }

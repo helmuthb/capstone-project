@@ -11,21 +11,29 @@ import java.util.List;
 
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.model.Room;
+import at.breitenfellner.roomquestions.util.KeyIdSource;
 
 /**
  * Adapter to show different question lists
  */
 
-public class RoomsPagerAdapter extends FragmentPagerAdapter {
+class RoomsPagerAdapter extends FragmentPagerAdapter {
     private View parent;
     private List<Room> rooms;
     private List<QuestionsSubFragment> fragments;
+    private KeyIdSource keyIdSource;
 
-    RoomsPagerAdapter(View parent, FragmentManager fm, List<Room> rooms) {
+    RoomsPagerAdapter(View parent, FragmentManager fm, List<Room> rooms, KeyIdSource keyIdSource) {
         super(fm);
         this.parent = parent;
         this.rooms = rooms;
         this.fragments = new ArrayList<>();
+        this.keyIdSource = keyIdSource;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return keyIdSource.getId(rooms.get(position).key);
     }
 
     @Override

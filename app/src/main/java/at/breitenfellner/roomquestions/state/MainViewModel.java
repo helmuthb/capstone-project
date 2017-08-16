@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentActivity;
 
 import com.firebase.ui.auth.AuthUI;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +15,6 @@ import javax.inject.Inject;
 
 import at.breitenfellner.roomquestions.di.DaggerRoomQuestionsComponent;
 import at.breitenfellner.roomquestions.di.RoomQuestionsComponent;
-import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.util.KeyIdSource;
@@ -40,6 +38,7 @@ public class MainViewModel extends ViewModel
     private User user;
     private MutableLiveData<User> liveUser;
     private MutableLiveData<List<Room>> liveRooms;
+    private int currentRoomPosition;
 
     public MainViewModel() {
         super();
@@ -56,6 +55,7 @@ public class MainViewModel extends ViewModel
         userAuthState.addStateChangeListener(this);
         // add listener on room changes
         roomsList.addChangeListener(this);
+        currentRoomPosition = 0;
     }
 
     private void setIsLoggedIn(boolean value) {
@@ -72,6 +72,15 @@ public class MainViewModel extends ViewModel
         }
     }
 
+
+    public int getCurrentRoomPosition() {
+        return currentRoomPosition;
+    }
+
+    public void setCurrentRoomPosition(int currentRoomPosition) {
+        this.currentRoomPosition = currentRoomPosition;
+    }
+
     public boolean isLoggedIn() {
         return loggedIn;
     }
@@ -80,11 +89,8 @@ public class MainViewModel extends ViewModel
         return liveRooms;
     }
 
-    public long getRoomId(Room room) {
-        if (room != null && room.key != null) {
-            return keyIdSource.getId(room.key);
-        }
-        return -1L;
+    public KeyIdSource getKeyIdSource() {
+        return keyIdSource;
     }
 
     public Room getRoom(String roomKey) {

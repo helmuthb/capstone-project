@@ -13,6 +13,7 @@ import java.util.List;
 
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.model.Room;
+import at.breitenfellner.roomquestions.util.KeyIdSource;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -20,13 +21,26 @@ import butterknife.ButterKnife;
  * Adapter to show a room in a recycler view
  */
 
-public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
+class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ViewHolder> {
     private List<Room> rooms;
     private RoomSelectionListener listener;
+    private KeyIdSource keyIdSource;
 
-    RoomAdapter(List<Room> rooms, RoomSelectionListener listener) {
+    RoomsAdapter(List<Room> rooms, RoomSelectionListener listener, KeyIdSource keyIdSource) {
+        super();
         this.rooms = rooms;
         this.listener = listener;
+        this.keyIdSource = keyIdSource;
+        setHasStableIds(true);
+    }
+
+    void setRoomSelectionListener(RoomSelectionListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return keyIdSource.getId(rooms.get(position).key);
     }
 
     @Override
@@ -34,13 +48,13 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_home_room, parent, false);
-        return new ViewHolder(view, listener);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Room room = rooms.get(position);
-        holder.bind(room);
+        holder.bind(room, position);
     }
 
     @Override
@@ -48,29 +62,33 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         return rooms.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         Room room;
         @BindView(R.id.room_name)
         TextView roomName;
         @BindView(R.id.room_description)
-                TextView roomDescription;
+        TextView roomDescription;
         @BindView(R.id.room_button)
         Button roomButton;
+        int position;
 
-        ViewHolder(@NonNull View itemView, final RoomSelectionListener listener) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             // call listener when button is clicked
             roomButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onRoomSelected(room);
+                    if (listener != null) {
+                        listener.onRoomSelected(room, position);
+                    }
                 }
             });
         }
 
-        void bind(Room room) {
+        void bind(Room room, int position) {
             this.room = room;
+            this.position = position;
             if (room != null) {
                 roomName.setText(room.name);
                 roomDescription.setText(room.description);
@@ -81,6 +99,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
     }
 
     interface RoomSelectionListener {
-        void onRoomSelected(Room room);
+        void onRoomSelected(Room room, int position);
     }
 }

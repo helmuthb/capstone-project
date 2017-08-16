@@ -63,6 +63,7 @@ public class FirebaseQuestionsList implements QuestionsList, ValueEventListener 
             listener.onChange(this);
         }
     }
+
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         questions = new ArrayList<>();

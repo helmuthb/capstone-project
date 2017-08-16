@@ -7,34 +7,52 @@
     android:orientation="horizontal">
 
     <FrameLayout
+        android:id="@+id/star_combined"
         android:layout_width="@dimen/star_size"
         android:layout_height="@dimen/star_size"
-        android:layout_margin="@dimen/keyline"
-        android:id="@+id/star_combined">
+        android:layout_margin="@dimen/keyline">
 
         <ImageView
             android:id="@+id/star_image"
             android:layout_width="@dimen/star_size"
             android:layout_height="@dimen/star_size"
-            app:srcCompat="@drawable/ic_star_empty"
             android:contentDescription="@string/upvotes"
             android:tint="@color/colorPrimary"
-            />
+            app:srcCompat="@drawable/ic_star_empty" />
 
         <TextView
             android:id="@+id/star_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textAppearance="@style/BodyTextAppearance"
             tools:text="4" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/question_text"
+    <LinearLayout
+        android:id="@+id/question_text_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginEnd="@dimen/keyline"
-        android:layout_marginRight="@dimen/keyline"
-        tools:text="Why using Android? Isn't iOS a much a better operating system, when looking into the merits of it?" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/keyline"
+            android:layout_marginRight="@dimen/keyline"
+            android:textAppearance="@style/BodyTextAppearance"
+            tools:text="Why using Android? Isn't iOS a much better operating system, when looking into the merits of it?" />
+
+        <TextView
+            android:id="@+id/question_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/keyline"
+            android:layout_marginRight="@dimen/keyline"
+            android:textStyle="italic"
+            tools:text="Anonymous" />
+    </LinearLayout>
+
 </LinearLayout>

@@ -25,8 +25,7 @@ import butterknife.ButterKnife;
  * Home fragment class
  */
 
-public class HomeFragment extends LifecycleFragment
-implements RoomAdapter.RoomSelectionListener {
+public class HomeFragment extends LifecycleFragment {
     MainViewModel viewModel;
     @BindView(R.id.text_why_login)
     TextView whyLoginText;
@@ -36,6 +35,8 @@ implements RoomAdapter.RoomSelectionListener {
     TextView welcomeText;
     @BindView(R.id.home_room_list)
     RecyclerView roomListView;
+    RoomsAdapter adapter;
+    RoomsAdapter.RoomSelectionListener listener;
 
     @Nullable
     @Override
@@ -69,7 +70,7 @@ implements RoomAdapter.RoomSelectionListener {
             @Override
             public void onChanged(@Nullable List<Room> rooms) {
                 if (rooms != null) {
-                    RoomAdapter adapter = new RoomAdapter(rooms, HomeFragment.this);
+                    adapter = new RoomsAdapter(rooms, listener, viewModel.getKeyIdSource());
                     roomListView.setAdapter(adapter);
                 }
             }
@@ -84,8 +85,10 @@ implements RoomAdapter.RoomSelectionListener {
         return rootView;
     }
 
-    @Override
-    public void onRoomSelected(Room room) {
-        //
+    public void setRoomSelectionListener(RoomsAdapter.RoomSelectionListener listener) {
+        this.listener = listener;
+        if (adapter != null) {
+            adapter.setRoomSelectionListener(listener);
+        }
     }
 }

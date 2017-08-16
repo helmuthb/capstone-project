@@ -10,9 +10,11 @@ import javax.inject.Singleton;
 import at.breitenfellner.roomquestions.firebase.FirebaseQuestionsList;
 import at.breitenfellner.roomquestions.firebase.FirebaseRoomsList;
 import at.breitenfellner.roomquestions.firebase.FirebaseUserAuthState;
+import at.breitenfellner.roomquestions.firebase.FirebaseVotesMap;
 import at.breitenfellner.roomquestions.state.QuestionsList;
 import at.breitenfellner.roomquestions.state.RoomsList;
 import at.breitenfellner.roomquestions.state.UserAuthState;
+import at.breitenfellner.roomquestions.state.VotesMap;
 import dagger.Module;
 import dagger.Provides;
 
@@ -62,5 +64,17 @@ public class FirebaseModule {
     @Named("questions-root")
     static String getQuestionsRoot() {
         return "questions";
+    }
+
+    @Provides
+    @Singleton
+    static VotesMap getVotesMap(DatabaseReference dbReference, @Named("votes-root") String votesRoot) {
+        return new FirebaseVotesMap(dbReference, votesRoot);
+    }
+
+    @Provides
+    @Named("votes-root")
+    static String getVotesRoot() {
+        return "votes";
     }
 }

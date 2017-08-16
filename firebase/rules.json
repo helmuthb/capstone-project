@@ -11,8 +11,10 @@
     },
     "votes": {
       ".read": true,
-      "$userid": {
-        ".write": "$userid === auth.uid"
+      "$questionid": {
+        "$userid": {
+          ".write": "$userid === auth.uid"
+        }
       }
     }
   }

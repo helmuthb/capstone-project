@@ -28,7 +28,7 @@ public class FirebaseRoomsList implements RoomsList {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // load the data
-                rooms = new ArrayList<Room>();
+                rooms = new ArrayList<>();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     rooms.add(child.getValue(Room.class));
                 }
@@ -41,7 +41,7 @@ public class FirebaseRoomsList implements RoomsList {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // create empty room list
-                rooms = new ArrayList<Room>();
+                rooms = new ArrayList<>();
                 // notify the listeners
                 for (ChangeListener listener : listeners) {
                     listener.onChange(FirebaseRoomsList.this);

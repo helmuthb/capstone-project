@@ -10,6 +10,10 @@ public class SimpleKeyIdSource implements KeyIdSource {
     private HashMap<String, Long> idMap;
     private long lastId = 0L;
 
+    public SimpleKeyIdSource() {
+        idMap = new HashMap<>();
+    }
+
     public long getId(String key) {
         Long id = idMap.get(key);
         if (id == null) {

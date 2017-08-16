@@ -9,11 +9,14 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.model.Room;
+import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.state.MainViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +29,10 @@ public class RoomsFragment extends LifecycleFragment {
     MainViewModel viewModel;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    @BindView(R.id.textview_why_login)
+    TextView whyLoginText;
+    @BindView(R.id.button_login)
+    Button buttonLogin;
 
     @Nullable
     @Override
@@ -40,10 +47,59 @@ public class RoomsFragment extends LifecycleFragment {
             public void onChanged(@Nullable List<Room> rooms) {
                 // create pager adapter
                 if (rooms != null) {
-                    RoomsPagerAdapter adapter = new RoomsPagerAdapter(viewPager, getChildFragmentManager(), rooms);
+                    RoomsPagerAdapter adapter = new RoomsPagerAdapter(viewPager, getChildFragmentManager(), rooms, viewModel.getKeyIdSource());
                     // set adapter
                     viewPager.setAdapter(adapter);
+                    // set first page - delayed after a layout phase
+                    final int currentRoom = viewModel.getCurrentRoomPosition();
+                    if (currentRoom < rooms.size()) {
+                        viewPager.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                viewPager.setCurrentItem(currentRoom, false);
+                            }
+                        });
+                    }
                 }
+            }
+        });
+        // subscribe to changes in the ViewPager
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // don't care
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                viewModel.setCurrentRoomPosition(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                // don't care
+            }
+        });
+        // subscribe to changes in the login state
+        viewModel.liveGetUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user == null) {
+                    // show login button
+                    buttonLogin.setVisibility(View.VISIBLE);
+                    whyLoginText.setVisibility(View.VISIBLE);
+                } else {
+                    // hide login button
+                    buttonLogin.setVisibility(View.GONE);
+                    whyLoginText.setVisibility(View.GONE);
+                }
+            }
+        });
+        // add login button functionality
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.startLogin(getActivity());
             }
         });
         return rootView;

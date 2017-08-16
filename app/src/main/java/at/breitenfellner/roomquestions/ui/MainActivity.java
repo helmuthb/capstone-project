@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.di.GlideApp;
+import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.state.MainViewModel;
 import butterknife.BindView;
@@ -36,7 +37,8 @@ import butterknife.ButterKnife;
  */
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LifecycleRegistryOwner {
+        implements NavigationView.OnNavigationItemSelectedListener, LifecycleRegistryOwner,
+        RoomsAdapter.RoomSelectionListener {
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
@@ -76,11 +78,15 @@ public class MainActivity extends AppCompatActivity
         // get view model
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         // Bind fragment is no save data - otherwise Android will do it for me
+        FragmentManager fm = getSupportFragmentManager();
         if (savedInstanceState == null) {
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.fragment_container, new HomeFragment());
-            ft.commit();
+            navigationView.setCheckedItem(R.id.nav_home);
+            doNavigationAction(R.id.nav_home);
+        }
+        // get existing fragment: shall we bind listeners?
+        Fragment current = fm.findFragmentById(R.id.fragment_container);
+        if (current instanceof HomeFragment) {
+            ((HomeFragment) current).setRoomSelectionListener(this);
         }
         // listen for authentication changes
         viewModel.liveGetUser().observe(this, new Observer<User>() {
@@ -93,8 +99,7 @@ public class MainActivity extends AppCompatActivity
                     dv.logout.setVisibility(View.GONE);
                     dv.whyLoginText.setVisibility(View.VISIBLE);
                     dv.login.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     // we are logged in!
                     dv.userName.setVisibility(View.VISIBLE);
                     dv.userPicture.setVisibility(View.VISIBLE);
@@ -126,18 +131,17 @@ public class MainActivity extends AppCompatActivity
         dv.logout.setOnClickListener(logoutOperation);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    void doNavigationAction(int itemId) {
         FragmentManager fm = getSupportFragmentManager();
         Fragment oldFragment = fm.findFragmentById(R.id.fragment_container);
-        // Handle navigation menu choices
-        int id = item.getItemId();
-        switch (id) {
+        switch (itemId) {
             case R.id.nav_home:
                 // do home action
                 if (!(oldFragment instanceof HomeFragment)) {
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragment_container, new HomeFragment());
+                    HomeFragment homeFragment = new HomeFragment();
+                    homeFragment.setRoomSelectionListener(this);
+                    ft.replace(R.id.fragment_container, homeFragment);
                     ft.commit();
                 }
                 break;
@@ -151,6 +155,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_license:
                 // do license action
+                if (!(oldFragment instanceof LicenseFragment)) {
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragment_container, new LicenseFragment());
+                    ft.commit();
+                }
                 break;
             case R.id.nav_source:
                 // do source action
@@ -159,6 +168,13 @@ public class MainActivity extends AppCompatActivity
                 // do GDG action
                 break;
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation menu choices
+        int id = item.getItemId();
+        doNavigationAction(id);
         // close drawer layout
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -167,6 +183,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public LifecycleRegistry getLifecycle() {
         return lifecycleRegistry;
+    }
+
+    @Override
+    public void onRoomSelected(Room room, int position) {
+        viewModel.setCurrentRoomPosition(position);
+        navigationView.setCheckedItem(R.id.nav_questions);
+        doNavigationAction(R.id.nav_questions);
     }
 
     class DrawerViews {
