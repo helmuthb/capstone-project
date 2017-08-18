@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
     @Nullable
     @BindView(R.id.tablet_top_layout)
-    LinearLayout tabletLayout;
+    View tabletLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
@@ -176,9 +177,17 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_source:
                 // do source action
+                String githubUrl = getResources().getString(R.string.github_source_link);
+                Intent githubIntent = new Intent(Intent.ACTION_VIEW);
+                githubIntent.setData(Uri.parse(githubUrl));
+                startActivity(githubIntent);
                 break;
             case R.id.nav_gdg:
                 // do GDG action
+                String gdgUrl = getResources().getString(R.string.gdg_vienna_url);
+                Intent gdgIntent = new Intent(Intent.ACTION_VIEW);
+                gdgIntent.setData(Uri.parse(gdgUrl));
+                startActivity(gdgIntent);
                 break;
         }
     }

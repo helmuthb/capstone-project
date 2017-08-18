@@ -14,6 +14,7 @@
     <string name="license">License</string>
     <string name="source_code">Source Code</string>
     <string name="gdg_vienna">GDG Vienna</string>
+    <string name="gdg_vienna_url">http://www.gdg-vienna.at</string>
     <string name="questions">Questions</string>
     <string name="overview">Overview</string>
     <string name="your_question">Your Question</string>
