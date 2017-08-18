@@ -20,7 +20,7 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
     <!-- Normal Text appearance -->
-    <style name="BodyTextAppearance" parent="TextAppearance.AppCompat.Body1"/>
+    <style name="BodyTextAppearance" parent="TextAppearance.AppCompat.Body1" />
     <!-- Smaller header appearance -->
     <style name="HeaderSmallTextAppearance" parent="BodyTextAppearance">
         <item name="android:textColor">@color/colorPrimary</item>
@@ -28,8 +28,12 @@
     </style>
 
     <!-- Button Styles: normal ... -->
-    <style name="ButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+    <style name="ButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless.Colored" />
     <!-- ... and emphasized -->
-    <style name="ButtonStyleEmphasized" parent="@style/Widget.AppCompat.Button.Colored"/>
+    <style name="ButtonStyleEmphasized" parent="@style/Widget.AppCompat.Button.Colored" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

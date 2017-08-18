@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,14 @@ public class RoomsFragment extends LifecycleFragment {
     TextView whyLoginText;
     @BindView(R.id.button_login)
     Button buttonLogin;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    OpenQuestionOperation questionOperation;
+    List<Room> rooms;
+
+    public void setQuestionOperations(OpenQuestionOperation questionOperation) {
+        this.questionOperation = questionOperation;
+    }
 
     @Nullable
     @Override
@@ -47,6 +56,7 @@ public class RoomsFragment extends LifecycleFragment {
             public void onChanged(@Nullable List<Room> rooms) {
                 // create pager adapter
                 if (rooms != null) {
+                    RoomsFragment.this.rooms = rooms;
                     RoomsPagerAdapter adapter = new RoomsPagerAdapter(viewPager, getChildFragmentManager(), rooms, viewModel.getKeyIdSource());
                     // set adapter
                     viewPager.setAdapter(adapter);
@@ -102,6 +112,24 @@ public class RoomsFragment extends LifecycleFragment {
                 viewModel.startLogin(getActivity());
             }
         });
+        // add FAB functionality
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // open question if possible
+                if (questionOperation != null) {
+                    int roomPosition = viewModel.getCurrentRoomPosition();
+                    if (rooms != null && roomPosition < rooms.size() && roomPosition >= 0) {
+                        Room room = rooms.get(roomPosition);
+                        questionOperation.openAskQuestion(room);
+                    }
+                }
+            }
+        });
         return rootView;
+    }
+
+    interface OpenQuestionOperation {
+        void openAskQuestion(Room room);
     }
 }

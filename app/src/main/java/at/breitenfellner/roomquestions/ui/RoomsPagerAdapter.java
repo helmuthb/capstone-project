@@ -1,6 +1,5 @@
 package at.breitenfellner.roomquestions.ui;
 
-import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -56,7 +55,7 @@ class RoomsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         Room room = rooms.get(position);
         if (room != null) {
-            return parent.getResources().getString(R.string.tab_title, room.name, room.description);
+            return parent.getResources().getString(R.string.room_name, room.name, room.description);
         }
         else {
             return null;

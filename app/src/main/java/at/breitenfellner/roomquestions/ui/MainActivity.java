@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.di.GlideApp;
+import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.state.MainViewModel;
@@ -38,13 +39,14 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, LifecycleRegistryOwner,
-        RoomsAdapter.RoomSelectionListener {
+        RoomsAdapter.RoomSelectionListener, RoomsFragment.OpenQuestionOperation {
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    ActionBarDrawerToggle toggle;
     DrawerViews dv;
     MainViewModel viewModel;
     LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,
                 toolbar,
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         // get view model
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // Bind fragment is no save data - otherwise Android will do it for me
+        // Bind fragment if no save data - otherwise Android will do it for me
         FragmentManager fm = getSupportFragmentManager();
         if (savedInstanceState == null) {
             navigationView.setCheckedItem(R.id.nav_home);
@@ -87,6 +89,8 @@ public class MainActivity extends AppCompatActivity
         Fragment current = fm.findFragmentById(R.id.fragment_container);
         if (current instanceof HomeFragment) {
             ((HomeFragment) current).setRoomSelectionListener(this);
+        } else if (current instanceof RoomsFragment) {
+            ((RoomsFragment) current).setQuestionOperations(this);
         }
         // listen for authentication changes
         viewModel.liveGetUser().observe(this, new Observer<User>() {
@@ -149,7 +153,9 @@ public class MainActivity extends AppCompatActivity
                 // do questions action
                 if (!(oldFragment instanceof RoomsFragment)) {
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragment_container, new RoomsFragment());
+                    RoomsFragment roomsFragment = new RoomsFragment();
+                    roomsFragment.setQuestionOperations(this);
+                    ft.replace(R.id.fragment_container, roomsFragment);
                     ft.commit();
                 }
                 break;
@@ -168,6 +174,15 @@ public class MainActivity extends AppCompatActivity
                 // do GDG action
                 break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -190,6 +205,16 @@ public class MainActivity extends AppCompatActivity
         viewModel.setCurrentRoomPosition(position);
         navigationView.setCheckedItem(R.id.nav_questions);
         doNavigationAction(R.id.nav_questions);
+    }
+
+    @Override
+    public void openAskQuestion(Room room) {
+        // start activity
+        Intent questionIntent = new Intent(this, NewQuestionActivity.class);
+        Bundle args = new Bundle();
+        args.putString(NewQuestionFragment.ARG_ROOMKEY, room.key);
+        questionIntent.putExtras(args);
+        startActivity(questionIntent);
     }
 
     class DrawerViews {

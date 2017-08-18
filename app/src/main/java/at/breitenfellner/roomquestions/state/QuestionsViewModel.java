@@ -80,7 +80,7 @@ public class QuestionsViewModel extends MainViewModel
                         votedQuestion.votedByMe = votesMap.hasVoted(q, getUser());
                         votedQuestions.add(votedQuestion);
                     }
-                    Collections.sort(votedQuestions, new VotedQuestion.Comparator());
+                    Collections.sort(votedQuestions, Collections.<VotedQuestion>reverseOrder(new VotedQuestion.Comparator()));
                 }
                 return votedQuestions;
             }
@@ -93,6 +93,12 @@ public class QuestionsViewModel extends MainViewModel
         if (user != null) {
             votesMap.setVoted(question, user, voted);
         }
+    }
+
+    @UiThread
+    public void addQuestion(String text, String author) {
+        // add question
+        questionsList.addQuestion(text, author);
     }
 
     @UiThread

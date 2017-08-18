@@ -12,6 +12,7 @@ import at.breitenfellner.roomquestions.model.Room;
 public interface QuestionsList {
     List<Question> getQuestions();
     void setRoom(Room room);
+    void addQuestion(String text, String author);
     void addChangeListener(ChangeListener changeListener);
     void removeChangeListener(ChangeListener changeListener);
 

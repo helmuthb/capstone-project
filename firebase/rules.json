@@ -6,7 +6,9 @@
     "questions": {
       "$room": {
         ".read": true,
-        ".write": "!data.exists() && auth != null"
+        "$question": {
+          ".write": "!data.exists() && auth != null"
+        }
       }
     },
     "votes": {

@@ -1,8 +1,11 @@
 package at.breitenfellner.roomquestions.firebase;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -19,11 +22,11 @@ import at.breitenfellner.roomquestions.state.QuestionsList;
 public class FirebaseQuestionsList implements QuestionsList, ValueEventListener {
     private List<Question> questions;
     private List<ChangeListener> listeners;
-    private DatabaseReference dbReference;
+    private DatabaseReference dbQuestions;
     private String roomKey;
 
     public FirebaseQuestionsList(DatabaseReference databaseReference, String root) {
-        dbReference = databaseReference.child(root);
+        dbQuestions = databaseReference.child(root);
         listeners = new ArrayList<>();
         roomKey = null;
     }
@@ -37,15 +40,27 @@ public class FirebaseQuestionsList implements QuestionsList, ValueEventListener 
         if (room != null && !room.key.equals(roomKey)) {
             if (roomKey != null) {
                 // remove me as a listener from old position
-                dbReference.child(roomKey).removeEventListener(this);
+                dbQuestions.child(roomKey).removeEventListener(this);
             }
             roomKey = room.key;
-            dbReference.child(roomKey).addValueEventListener(this);
+            dbQuestions.child(roomKey).addValueEventListener(this);
         }
         else if (room == null && roomKey != null) {
-            dbReference.child(roomKey).removeEventListener(this);
+            dbQuestions.child(roomKey).removeEventListener(this);
             roomKey = null;
         }
+    }
+
+    @Override
+    public void addQuestion(String text, String author) {
+        Question question = new Question();
+        question.text = text;
+        question.author = author;
+        question.owner = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference newNode = dbQuestions.child(roomKey).push();
+        question.key = newNode.getKey();
+        question.date = System.currentTimeMillis()/1000;
+        newNode.setValue(question);
     }
 
     @Override

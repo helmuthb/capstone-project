@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
  */
 
 public class HomeFragment extends LifecycleFragment {
+
     MainViewModel viewModel;
     @BindView(R.id.text_why_login)
     TextView whyLoginText;
