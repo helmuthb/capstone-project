@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import at.breitenfellner.roomquestions.R;
@@ -41,8 +42,12 @@ public class MainActivity extends AppCompatActivity
         RoomsAdapter.RoomSelectionListener, RoomsFragment.OpenQuestionOperation {
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    @Nullable
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @Nullable
+    @BindView(R.id.tablet_top_layout)
+    LinearLayout tabletLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
@@ -65,16 +70,19 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        toggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
         dv = new DrawerViews();
         ButterKnife.bind(dv, navigationView.getHeaderView(0));
-        toggle.syncState();
+        // on phone we have drawer, on tablet we don't
+        if (drawerLayout != null) {
+            toggle = new ActionBarDrawerToggle(
+                    this,
+                    drawerLayout,
+                    toolbar,
+                    R.string.navigation_drawer_open,
+                    R.string.navigation_drawer_close);
+            drawerLayout.addDrawerListener(toggle);
+            toggle.syncState();
+        }
         navigationView.setNavigationItemSelectedListener(this);
         // get view model
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
@@ -189,8 +197,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation menu choices
         int id = item.getItemId();
         doNavigationAction(id);
-        // close drawer layout
-        drawerLayout.closeDrawer(GravityCompat.START);
+        // close drawer layout (if we have one)
+        if (drawerLayout != null) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
         return true;
     }
 
