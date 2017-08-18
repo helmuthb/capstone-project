@@ -14,6 +14,7 @@ import java.util.List;
 
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.model.Room;
+import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.model.VotedQuestion;
 import at.breitenfellner.roomquestions.state.QuestionsViewModel;
 import butterknife.BindView;
@@ -81,6 +82,13 @@ public class QuestionsSubFragment extends LifecycleFragment implements Questions
                     Timber.d("New questions list arrived");
                     adapter.updateQuestionsList(questions);
                 }
+            }
+        });
+        // watch for changes in login status
+        viewModel.liveGetUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                adapter.setLoginStatus(user != null);
             }
         });
         return rootView;

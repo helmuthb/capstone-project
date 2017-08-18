@@ -3,6 +3,7 @@ package at.breitenfellner.roomquestions.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder>
     private QuestionsListCallback listCallback;
     private QuestionClickListener listener;
     private KeyIdSource keyIdSource;
+    private boolean isLoggedIn;
 
     QuestionsAdapter(QuestionClickListener listener, KeyIdSource keyIdSource) {
         this.listCallback = new QuestionsListCallback(this);
@@ -43,6 +45,14 @@ class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder>
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
         questions = newQuestions;
         result.dispatchUpdatesTo(this);
+    }
+
+    void setLoginStatus(boolean isLoggedIn) {
+        if (this.isLoggedIn != isLoggedIn) {
+            // send an update-request to redraw all items
+            notifyDataSetChanged();
+        }
+        this.isLoggedIn = isLoggedIn;
     }
 
     @Override
@@ -69,14 +79,14 @@ class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder>
         return questions.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         VotedQuestion question;
         @BindView(R.id.star_combined)
         View voteStar;
         @BindView(R.id.star_count)
         TextView voteCount;
         @BindView(R.id.star_image)
-        ImageView voteImage;
+        AppCompatImageView voteImage;
         @BindView(R.id.question_text)
         TextView questionText;
         @BindView(R.id.question_author)
@@ -100,11 +110,12 @@ class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder>
                 questionText.setText(question.text);
                 questionAuthor.setText(question.author);
                 voteCount.setText(Integer.toString(question.voteCount));
-                if (question.votedByMe) {
+                if (question.votedByMe && isLoggedIn) {
                     voteImage.setImageResource(R.drawable.ic_star_full);
                 } else {
                     voteImage.setImageResource(R.drawable.ic_star_empty);
                 }
+                voteImage.setEnabled(isLoggedIn);
             }
         }
     }

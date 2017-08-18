@@ -98,10 +98,16 @@ public class RoomsFragment extends LifecycleFragment {
                     // show login button
                     buttonLogin.setVisibility(View.VISIBLE);
                     whyLoginText.setVisibility(View.VISIBLE);
+                    // hide FAB
+                    fab.setVisibility(View.GONE);
+                    // set adapter login status
+
                 } else {
                     // hide login button
                     buttonLogin.setVisibility(View.GONE);
                     whyLoginText.setVisibility(View.GONE);
+                    // show FAB
+                    fab.setVisibility(View.VISIBLE);
                 }
             }
         });

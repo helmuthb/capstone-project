@@ -17,7 +17,7 @@
             android:layout_width="@dimen/star_size"
             android:layout_height="@dimen/star_size"
             android:contentDescription="@string/upvotes"
-            android:tint="@color/colorPrimary"
+            android:tint="@color/star_colors"
             app:srcCompat="@drawable/ic_star_empty" />
 
         <TextView
