@@ -17,10 +17,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import at.breitenfellner.roomquestions.R;
-import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
-import at.breitenfellner.roomquestions.state.MainViewModel;
 import at.breitenfellner.roomquestions.state.QuestionsViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,8 +96,7 @@ public class NewQuestionFragment extends LifecycleFragment {
                 if (checked) {
                     // show name edit field
                     nameField.setText(displayName);
-                }
-                else {
+                } else {
                     displayName = nameField.getText().toString();
                     nameField.setText(R.string.name_anonymous);
                 }

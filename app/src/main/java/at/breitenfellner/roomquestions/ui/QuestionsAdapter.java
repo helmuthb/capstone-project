@@ -1,10 +1,8 @@
 package at.breitenfellner.roomquestions.ui;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
-import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.view.LayoutInflater;
@@ -17,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.breitenfellner.roomquestions.R;
-import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.VotedQuestion;
 import at.breitenfellner.roomquestions.util.KeyIdSource;
 import butterknife.BindView;
@@ -105,8 +102,7 @@ class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder>
                 voteCount.setText(Integer.toString(question.voteCount));
                 if (question.votedByMe) {
                     voteImage.setImageResource(R.drawable.ic_star_full);
-                }
-                else {
+                } else {
                     voteImage.setImageResource(R.drawable.ic_star_empty);
                 }
             }

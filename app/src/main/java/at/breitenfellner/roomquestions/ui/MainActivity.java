@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.di.GlideApp;
-import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.state.MainViewModel;

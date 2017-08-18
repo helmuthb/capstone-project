@@ -10,7 +10,9 @@ import at.breitenfellner.roomquestions.model.Room;
 
 public interface RoomsList {
     List<Room> getRooms();
+
     void addChangeListener(ChangeListener changeListener);
+
     void removeChangeListener(ChangeListener changeListener);
 
     interface ChangeListener {

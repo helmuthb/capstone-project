@@ -11,10 +11,11 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = { FirebaseModule.class, UtilModule.class })
+@Component(modules = {FirebaseModule.class, UtilModule.class})
 public interface RoomQuestionsComponent {
     // MainViewModel needs user authentication state and rooms list
     void inject(MainViewModel mainViewModel);
+
     // QuestionsViewModel needs questions list
     void injectQuestions(QuestionsViewModel questionsViewModel);
 }

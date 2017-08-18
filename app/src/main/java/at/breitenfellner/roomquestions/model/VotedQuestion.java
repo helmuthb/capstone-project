@@ -1,9 +1,5 @@
 package at.breitenfellner.roomquestions.model;
 
-import android.support.annotation.NonNull;
-
-import java.util.Comparator;
-
 /**
  * Data class managing voted questions.
  */

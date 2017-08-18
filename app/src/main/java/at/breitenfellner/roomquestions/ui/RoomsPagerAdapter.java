@@ -56,8 +56,7 @@ class RoomsPagerAdapter extends FragmentPagerAdapter {
         Room room = rooms.get(position);
         if (room != null) {
             return parent.getResources().getString(R.string.room_name, room.name, room.description);
-        }
-        else {
+        } else {
             return null;
         }
     }

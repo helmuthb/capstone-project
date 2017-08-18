@@ -1,11 +1,9 @@
 package at.breitenfellner.roomquestions.firebase;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -30,6 +28,7 @@ public class FirebaseQuestionsList implements QuestionsList, ValueEventListener 
         listeners = new ArrayList<>();
         roomKey = null;
     }
+
     @Override
     public List<Question> getQuestions() {
         return questions;
@@ -44,8 +43,7 @@ public class FirebaseQuestionsList implements QuestionsList, ValueEventListener 
             }
             roomKey = room.key;
             dbQuestions.child(roomKey).addValueEventListener(this);
-        }
-        else if (room == null && roomKey != null) {
+        } else if (room == null && roomKey != null) {
             dbQuestions.child(roomKey).removeEventListener(this);
             roomKey = null;
         }
@@ -59,7 +57,7 @@ public class FirebaseQuestionsList implements QuestionsList, ValueEventListener 
         question.owner = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference newNode = dbQuestions.child(roomKey).push();
         question.key = newNode.getKey();
-        question.date = System.currentTimeMillis()/1000;
+        question.date = System.currentTimeMillis() / 1000;
         newNode.setValue(question);
     }
 

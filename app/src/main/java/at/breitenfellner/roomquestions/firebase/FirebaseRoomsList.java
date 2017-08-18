@@ -8,8 +8,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
-
 import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.state.RoomsList;
 

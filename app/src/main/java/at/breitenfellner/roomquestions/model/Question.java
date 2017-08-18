@@ -1,7 +1,5 @@
 package at.breitenfellner.roomquestions.model;
 
-import com.google.firebase.database.Exclude;
-
 /**
  * Data class for a question.
  */

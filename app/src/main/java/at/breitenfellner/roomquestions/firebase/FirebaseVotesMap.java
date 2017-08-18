@@ -69,8 +69,7 @@ public class FirebaseVotesMap implements VotesMap, ValueEventListener {
         // use Firebase to add or remove a vote
         if (hasVoted) {
             dbVotes.child(question.key).child(user.uid).setValue(true);
-        }
-        else {
+        } else {
             dbVotes.child(question.key).child(user.uid).removeValue();
         }
     }

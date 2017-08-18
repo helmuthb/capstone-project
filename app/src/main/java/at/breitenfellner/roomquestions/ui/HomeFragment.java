@@ -57,8 +57,7 @@ public class HomeFragment extends LifecycleFragment {
                     String welcome = getResources().getString(R.string.welcome_text, user.name);
                     welcomeText.setText(welcome);
                     welcomeText.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     whyLoginText.setVisibility(View.VISIBLE);
                     buttonLogin.setVisibility(View.VISIBLE);
                     welcomeText.setText("");

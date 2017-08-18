@@ -6,22 +6,16 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import java.util.List;
 
 import at.breitenfellner.roomquestions.R;
-import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.state.QuestionsViewModel;
-import butterknife.BindView;
 
 public class NewQuestionActivity extends AppCompatActivity implements NewQuestionFragment.CloseQuestionOperation, LifecycleRegistryOwner {
     QuestionsViewModel viewModel;

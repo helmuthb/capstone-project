@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import at.breitenfellner.roomquestions.R;
-import at.breitenfellner.roomquestions.model.Question;
 import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.VotedQuestion;
 import at.breitenfellner.roomquestions.state.QuestionsViewModel;

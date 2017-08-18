@@ -9,8 +9,6 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.state.UserAuthState;
 
@@ -60,8 +58,7 @@ public class FirebaseUserAuthState implements UserAuthState, FirebaseAuth.AuthSt
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {
             user = null;
-        }
-        else {
+        } else {
             String name = firebaseUser.getDisplayName();
             android.net.Uri photoUrl = firebaseUser.getPhotoUrl();
             String uid = firebaseUser.getUid();

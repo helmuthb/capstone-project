@@ -8,8 +8,11 @@ import at.breitenfellner.roomquestions.model.User;
 
 public interface UserAuthState {
     boolean isAuthenticated();
+
     User getUser();
+
     void addStateChangeListener(StateChangeListener listener);
+
     void removeStateChangeListener(StateChangeListener listener);
 
     interface StateChangeListener {
