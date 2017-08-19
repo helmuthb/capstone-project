@@ -168,12 +168,9 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             case R.id.nav_license:
-                // do license action
-                if (!(oldFragment instanceof LicenseFragment)) {
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragment_container, new LicenseFragment());
-                    ft.commit();
-                }
+                // start license activity
+                Intent licenseIntent = new Intent(this, LicenseActivity.class);
+                startActivity(licenseIntent);
                 break;
             case R.id.nav_source:
                 // do source action

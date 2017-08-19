@@ -25,7 +25,7 @@ public class NewQuestionActivity extends AppCompatActivity implements NewQuestio
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_question);
+        setContentView(R.layout.activity_dialog);
         // get view model
         viewModel = ViewModelProviders.of(this).get(QuestionsViewModel.class);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

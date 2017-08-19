@@ -1,147 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/license_list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/keyline"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/license_list"
+    <TextView
+        android:id="@+id/label_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/keyline"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/keyline">
+        android:text="@string/app_long_name"
+        android:textAppearance="@style/HeaderTextAppearance" />
 
+    <TextView
+        android:id="@+id/text_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/keyline"
+        android:text="@string/about_app_long"
+        android:textAppearance="@style/BodyTextAppearance" />
 
-        <TextView
-            android:id="@+id/label_heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_long_name"
-            android:textAppearance="@style/HeaderTextAppearance" />
+    <TextView
+        android:id="@+id/libraries_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/libraries_used"
+        android:textAppearance="@style/HeaderTextAppearance" />
 
-        <TextView
-            android:id="@+id/text_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/keyline"
-            android:text="@string/about_app_long"
-            android:textAppearance="@style/BodyTextAppearance" />
+    <TextView
+        android:id="@+id/libraries_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/licences_used"
+        android:textAppearance="@style/BodyTextAppearance" />
 
-        <TextView
-            android:id="@+id/libraries_heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/libraries_used"
-            android:textAppearance="@style/HeaderTextAppearance" />
+    <TextView
+        android:id="@+id/dagger2_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_keyline"
+        android:text="@string/dagger2"
+        android:textAppearance="@style/HeaderSmallTextAppearance" />
 
-        <TextView
-            android:id="@+id/libraries_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/licences_used"
-            android:textAppearance="@style/BodyTextAppearance" />
+    <TextView
+        android:id="@+id/dagger2_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/copyright_dagger2"
+        android:textAppearance="@style/BodyTextAppearance" />
 
-        <TextView
-            android:id="@+id/dagger2_heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_keyline"
-            android:text="@string/dagger2"
-            android:textAppearance="@style/HeaderSmallTextAppearance" />
+    <TextView
+        android:id="@+id/dagger2_license"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_keyline"
+        android:text="@string/apache_license" />
 
-        <TextView
-            android:id="@+id/dagger2_copyright"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/copyright_dagger2"
-            android:textAppearance="@style/BodyTextAppearance" />
+    <TextView
+        android:id="@+id/butterknife_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_keyline"
+        android:text="@string/butterknife"
+        android:textAppearance="@style/HeaderSmallTextAppearance" />
 
-        <TextView
-            android:id="@+id/dagger2_license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_keyline"
-            android:text="@string/apache_license" />
+    <TextView
+        android:id="@+id/butterknife_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/copyright_butterknife"
+        android:textAppearance="@style/BodyTextAppearance" />
 
-        <TextView
-            android:id="@+id/butterknife_heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_keyline"
-            android:text="@string/butterknife"
-            android:textAppearance="@style/HeaderSmallTextAppearance" />
+    <TextView
+        android:id="@+id/butterknife_license"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_keyline"
+        android:text="@string/apache_license" />
 
-        <TextView
-            android:id="@+id/butterknife_copyright"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/copyright_butterknife"
-            android:textAppearance="@style/BodyTextAppearance" />
+    <TextView
+        android:id="@+id/timber_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_keyline"
+        android:text="@string/timber"
+        android:textAppearance="@style/HeaderSmallTextAppearance" />
 
-        <TextView
-            android:id="@+id/butterknife_license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_keyline"
-            android:text="@string/apache_license" />
+    <TextView
+        android:id="@+id/timber_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/copyright_timber"
+        android:textAppearance="@style/BodyTextAppearance" />
 
-        <TextView
-            android:id="@+id/timber_heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_keyline"
-            android:text="@string/timber"
-            android:textAppearance="@style/HeaderSmallTextAppearance" />
+    <TextView
+        android:id="@+id/timber_license"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_keyline"
+        android:text="@string/apache_license" />
 
-        <TextView
-            android:id="@+id/timber_copyright"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/copyright_timber"
-            android:textAppearance="@style/BodyTextAppearance" />
+    <TextView
+        android:id="@+id/source_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/source_code"
+        android:textAppearance="@style/HeaderTextAppearance" />
 
-        <TextView
-            android:id="@+id/timber_license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_keyline"
-            android:text="@string/apache_license" />
+    <TextView
+        android:id="@+id/github_source_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/github_source_link"
+        android:textAppearance="@style/BodyTextAppearance" />
 
-        <TextView
-            android:id="@+id/source_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/source_code"
-            android:textAppearance="@style/HeaderTextAppearance" />
+    <TextView
+        android:id="@+id/license"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/license"
+        android:textAppearance="@style/HeaderTextAppearance" />
 
-        <TextView
-            android:id="@+id/github_source_link"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/github_source_link"
-            android:textAppearance="@style/BodyTextAppearance" />
+    <TextView
+        android:id="@+id/copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/copyright"
+        android:textAppearance="@style/BodyTextAppearance" />
 
-        <TextView
-            android:id="@+id/license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/license"
-            android:textAppearance="@style/HeaderTextAppearance" />
+    <TextView
+        android:id="@+id/app_license"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_keyline"
+        android:paddingBottom="@dimen/keyline"
+        android:text="@string/apache_license" />
 
-        <TextView
-            android:id="@+id/copyright"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/copyright"
-            android:textAppearance="@style/BodyTextAppearance" />
-
-        <TextView
-            android:id="@+id/app_license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_keyline"
-            android:paddingBottom="@dimen/keyline"
-            android:text="@string/apache_license" />
-    </LinearLayout>
-
-</ScrollView>
+    <Button
+        android:id="@+id/close_button"
+        style="@style/ButtonStyle"
+        android:text="@string/close" />
+</LinearLayout>
