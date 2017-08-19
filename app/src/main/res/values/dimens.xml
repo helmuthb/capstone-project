@@ -8,4 +8,5 @@
     <dimen name="nav_image_margin_bottom">48dp</dimen>
     <dimen name="star_size">56dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <bool name="show_dialog">false</bool>
 </resources>

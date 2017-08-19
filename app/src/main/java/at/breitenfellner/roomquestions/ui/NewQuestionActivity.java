@@ -29,8 +29,10 @@ public class NewQuestionActivity extends AppCompatActivity implements NewQuestio
         // get view model
         viewModel = ViewModelProviders.of(this).get(QuestionsViewModel.class);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         if (savedInstanceState == null) {
             Bundle args = getIntent().getExtras();
             if (args != null && args.containsKey(NewQuestionFragment.ARG_ROOMKEY)) {
