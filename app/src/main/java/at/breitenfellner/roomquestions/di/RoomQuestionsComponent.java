@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import at.breitenfellner.roomquestions.state.MainViewModel;
 import at.breitenfellner.roomquestions.state.QuestionsViewModel;
+import at.breitenfellner.roomquestions.ui.QuestionsRemoteViewsFactory;
 import dagger.Component;
 
 /**

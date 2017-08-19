@@ -94,9 +94,12 @@ public class MainViewModel extends ViewModel
     }
 
     public Room getRoom(String roomKey) {
-        for (Room r : getLiveRooms().getValue()) {
-            if (r.key.equals(roomKey)) {
-                return r;
+        List<Room> rooms = getLiveRooms().getValue();
+        if (rooms != null) {
+            for (Room r : rooms) {
+                if (r.key.equals(roomKey)) {
+                    return r;
+                }
             }
         }
         return null;

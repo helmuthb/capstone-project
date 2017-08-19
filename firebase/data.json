@@ -1,30 +1,59 @@
 {
-  "rooms" : {
-    "room1" : {
-      "description" : "Android vs. iOS",
-      "name" : "Room 1",
-      "key": "room1"
-    },
-    "room2" : {
-      "description" : "Material Design",
-      "name" : "Room 2",
-      "key": "room2"
-    }
-  },
   "questions" : {
-    "room1": {
-      "unique-key-1": {
+    "room1" : {
+      "-KrlV56ppcIflYpoMVCj" : {
+        "author" : "Helmuth",
+        "date" : 0,
+        "key" : "-KrlV56ppcIflYpoMVCj",
+        "text" : "Anyone likes iOS? Really?!?"
+      },
+      "-KrlVePMMirQfgiHnw5V" : {
+        "author" : "Anonymous",
+        "date" : 1502995457,
+        "key" : "-KrlVePMMirQfgiHnw5V",
+        "owner" : "STvAgb2gaSPeq6NtCHzIgOcvq333",
+        "text" : "Who is a fan of Windows Phone?"
+      },
+      "-KrqXoH2sveJm2cbve0l" : {
+        "author" : "Helmuth",
+        "date" : 1503079908,
+        "key" : "-KrqXoH2sveJm2cbve0l",
+        "owner" : "STvAgb2gaSPeq6NtCHzIgOcvq333",
+        "text" : "What happens when the question is longer?\nI mean, would something like spanning three lines be seen as disruptive?"
+      },
+      "unique-key-1" : {
         "author" : "Helmuth",
         "date" : 14,
+        "key" : "unique-key-1",
         "owner" : "user1",
-        "text" : "Why is it so difficult to work with iOS?",
-        "key": "unique-key-1"
+        "text" : "Why is it so difficult to work with iOS?"
+      }
+    },
+    "room2" : {
+      "-Krm9M-LiDrxVgL6UAMb" : {
+        "author" : "Helmuth",
+        "date" : 1503006385,
+        "key" : "-Krm9M-LiDrxVgL6UAMb",
+        "owner" : "STvAgb2gaSPeq6NtCHzIgOcvq333",
+        "text" : "Why are there no questions?"
       }
     }
   },
-  "votes": {
-    "unique-key-1": {
-      "user1": true
+  "rooms" : {
+    "room1" : {
+      "description" : "Android vs. iOS",
+      "key" : "room1",
+      "name" : "Room 1"
+    },
+    "room2" : {
+      "description" : "Material Design",
+      "key" : "room2",
+      "name" : "Room 2"
+    }
+  },
+  "votes" : {
+    "unique-key-1" : {
+      "user1" : true
     }
   }
 }

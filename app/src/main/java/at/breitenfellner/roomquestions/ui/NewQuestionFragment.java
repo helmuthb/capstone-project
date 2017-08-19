@@ -72,7 +72,7 @@ public class NewQuestionFragment extends LifecycleFragment {
                     String roomName = getResources().getString(R.string.room_name, room.name, room.description);
                     roomNameView.setText(roomName);
                     // set room into viewmodel
-                    viewModel.setRoom(room);
+                    viewModel.setRoom(roomKey);
                 }
             }
         });

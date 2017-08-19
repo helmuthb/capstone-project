@@ -3,24 +3,21 @@ package at.breitenfellner.roomquestions.state;
 import java.util.List;
 
 import at.breitenfellner.roomquestions.model.Question;
-import at.breitenfellner.roomquestions.model.Room;
 
 /**
  * Interface to get the list of questions for a room.
  */
 
 public interface QuestionsList {
-    List<Question> getQuestions();
+    List<Question> getQuestions(String roomKey);
 
-    void setRoom(Room room);
+    void addQuestion(String roomKey, String text, String author);
 
-    void addQuestion(String text, String author);
+    void addChangeListener(String roomKey, ChangeListener changeListener);
 
-    void addChangeListener(ChangeListener changeListener);
-
-    void removeChangeListener(ChangeListener changeListener);
+    void removeChangeListener(String roomKey, ChangeListener changeListener);
 
     interface ChangeListener {
-        void onChange(QuestionsList questionsList);
+        void onChange(String roomKey, QuestionsList questionsList);
     }
 }

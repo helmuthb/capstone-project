@@ -25,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import at.breitenfellner.roomquestions.R;
 import at.breitenfellner.roomquestions.di.GlideApp;
 import at.breitenfellner.roomquestions.model.Room;
@@ -32,6 +34,7 @@ import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.state.MainViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 /**
  * Main Activity.
@@ -41,6 +44,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, LifecycleRegistryOwner,
         RoomsAdapter.RoomSelectionListener, RoomsFragment.OpenQuestionOperation {
+    static final String ARG_ROOMKEY = "room_key";
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     @Nullable
@@ -63,6 +67,35 @@ public class MainActivity extends AppCompatActivity
             viewModel.isLoggedIn();
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    void checkForRoomKey(Intent intent) {
+        // check if we got some data argument
+        if (intent.hasExtra(ARG_ROOMKEY)) {
+            final String roomKey = intent.getStringExtra(ARG_ROOMKEY);
+            Timber.d("Room key: " + roomKey);
+            navigationView.setCheckedItem(R.id.nav_questions);
+            viewModel.getLiveRooms().observe(this, new Observer<List<Room>>() {
+                @Override
+                public void onChanged(@Nullable List<Room> rooms) {
+                    if (rooms != null) {
+                        for (int i = 0; i < rooms.size(); i++) {
+                            if (rooms.get(i).key.equals(roomKey)) {
+                                onRoomSelected(rooms.get(i), i);
+                                Timber.d("Found room " + roomKey + rooms.get(i).name + Integer.toString(i));
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        checkForRoomKey(intent);
     }
 
     @Override
@@ -93,6 +126,8 @@ public class MainActivity extends AppCompatActivity
             navigationView.setCheckedItem(R.id.nav_home);
             doNavigationAction(R.id.nav_home);
         }
+        // check for argument
+        checkForRoomKey(getIntent());
         // get existing fragment: shall we bind listeners?
         Fragment current = fm.findFragmentById(R.id.fragment_container);
         if (current instanceof HomeFragment) {
@@ -159,13 +194,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_questions:
                 // do questions action
-                if (!(oldFragment instanceof RoomsFragment)) {
-                    FragmentTransaction ft = fm.beginTransaction();
-                    RoomsFragment roomsFragment = new RoomsFragment();
-                    roomsFragment.setQuestionOperations(this);
-                    ft.replace(R.id.fragment_container, roomsFragment);
-                    ft.commit();
-                }
+                FragmentTransaction ft = fm.beginTransaction();
+                RoomsFragment roomsFragment = new RoomsFragment();
+                roomsFragment.setQuestionOperations(this);
+                ft.replace(R.id.fragment_container, roomsFragment);
+                ft.commit();
                 break;
             case R.id.nav_license:
                 // start license activity

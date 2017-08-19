@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +16,6 @@ import javax.inject.Inject;
 import at.breitenfellner.roomquestions.di.DaggerRoomQuestionsComponent;
 import at.breitenfellner.roomquestions.di.RoomQuestionsComponent;
 import at.breitenfellner.roomquestions.model.Question;
-import at.breitenfellner.roomquestions.model.Room;
 import at.breitenfellner.roomquestions.model.User;
 import at.breitenfellner.roomquestions.model.VotedQuestion;
 
@@ -25,7 +25,7 @@ import at.breitenfellner.roomquestions.model.VotedQuestion;
 
 public class QuestionsViewModel extends MainViewModel
         implements QuestionsList.ChangeListener, VotesMap.ChangeListener {
-    private Room room;
+    private String roomKey;
     @Inject
     QuestionsList questionsList;
     @Inject
@@ -38,14 +38,20 @@ public class QuestionsViewModel extends MainViewModel
         RoomQuestionsComponent component = DaggerRoomQuestionsComponent.builder().build();
         component.injectQuestions(this);
         liveQuestions = new MutableLiveData<>();
-        questionsList.addChangeListener(this);
         votesMap.addChangeListener(this);
     }
 
     @UiThread
-    public void setRoom(Room room) {
-        this.room = room;
-        questionsList.setRoom(room);
+    public void setRoom(String roomKey) {
+        if (!TextUtils.equals(this.roomKey, roomKey)) {
+            if (this.roomKey != null) {
+                questionsList.removeChangeListener(this.roomKey, this);
+            }
+            if (roomKey != null) {
+                questionsList.addChangeListener(roomKey, this);
+            }
+            this.roomKey = roomKey;
+        }
     }
 
     @UiThread
@@ -95,19 +101,22 @@ public class QuestionsViewModel extends MainViewModel
 
     @UiThread
     public void addQuestion(String text, String author) {
-        // add question
-        questionsList.addQuestion(text, author);
+        questionsList.addQuestion(roomKey, text, author);
     }
 
     @UiThread
     @Override
-    public void onChange(QuestionsList questionsList) {
-        sortQuestions(questionsList.getQuestions());
+    public void onChange(String roomKey, QuestionsList questionsList) {
+        if (TextUtils.equals(roomKey, this.roomKey)) {
+            sortQuestions(questionsList.getQuestions(roomKey));
+        }
     }
 
     @UiThread
     @Override
     public void onChange(VotesMap votesMap) {
-        sortQuestions(questionsList.getQuestions());
+        if (roomKey != null) {
+            sortQuestions(questionsList.getQuestions(roomKey));
+        }
     }
 }

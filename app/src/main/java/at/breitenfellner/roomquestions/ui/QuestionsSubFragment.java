@@ -30,7 +30,6 @@ public class QuestionsSubFragment extends LifecycleFragment implements Questions
 
     QuestionsViewModel viewModel;
     String roomKey;
-    Room room;
     @BindView(R.id.questions_recyclerview)
     RecyclerView questionsView;
     QuestionsAdapter adapter;
@@ -42,18 +41,8 @@ public class QuestionsSubFragment extends LifecycleFragment implements Questions
         viewModel = ViewModelProviders.of(this).get(QuestionsViewModel.class);
         // get the room key
         roomKey = getArguments().getString(ARG_ROOMKEY);
-        room = null;
         adapter = new QuestionsAdapter(this, viewModel.getKeyIdSource());
-        viewModel.getLiveRooms().observe(this, new Observer<List<Room>>() {
-            @Override
-            public void onChanged(@Nullable List<Room> rooms) {
-                if (rooms != null && room == null) {
-                    // now we can get the room for the key
-                    room = viewModel.getRoom(roomKey);
-                    viewModel.setRoom(room);
-                }
-            }
-        });
+        viewModel.setRoom(roomKey);
     }
 
     static QuestionsSubFragment newInstance(Room room) {
