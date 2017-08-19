@@ -31,8 +31,6 @@
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/login"
         style="@style/ButtonStyleEmphasized"/>
 
@@ -48,8 +46,6 @@
 
     <Button
         android:id="@+id/button_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/logout"
         style="@style/ButtonStyle"
         android:visibility="gone" />

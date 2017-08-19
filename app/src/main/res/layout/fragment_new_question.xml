@@ -56,7 +56,5 @@
     <Button
         android:id="@+id/button_submit"
         style="@style/ButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/ask_question" />
 </LinearLayout>

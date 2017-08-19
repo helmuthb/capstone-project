@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Button Styles: normal ... -->
+    <style name="ButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">300dp</item>
+    </style>
+    <!-- ... and emphasized -->
+    <style name="ButtonStyleEmphasized" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">300dp</item>
+    </style>
+</resources>
